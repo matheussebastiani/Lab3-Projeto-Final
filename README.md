@@ -11,6 +11,4 @@ Desenvolver um sistema completo que integre Software e Hardware, que realize uma
 
 ## Ideia inicial  
 
-* Com um sketch de testes de um Arduino Uno, enviar constantemente dados do estado dos periféricos da placa (pinos analógicos e digitais, valores na EEPROM e outras regiões de memória, verificar eventualmente o funcionamento da I²C ou SPI, caso o modelo do Arduino suporte e for possível efetuar os testes dadas eventuais limitações técnicas de quem desenvolve o programa).
-* A aplicação em C++ deverá receber os dados do Arduino via serial (utilizando bibliotecas do framework do Arduino e do Qt) e exibi-las ao usuário de maneira intuitiva, além de (talvez) escrever na EEPROM e executar determinadas funções de hardware. (Avaliar).
-* O software verificará a integridade dos dados recebidos via serial e retornará ao usuário via interface gráfica se a placa está ou não em condições de uso.
+* Ler alguns sensores de concentração de gases, poeira, água, radiação UV, temperatura e luminosidade por um Arduino Uno e enviar constantemente os dados lidos para uma aplicação no Qt Creator que mostrará ao usuário as condições climáticas de onde ele se encontra.
