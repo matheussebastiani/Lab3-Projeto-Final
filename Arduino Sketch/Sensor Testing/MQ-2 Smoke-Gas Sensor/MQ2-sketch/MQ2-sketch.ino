@@ -26,6 +26,7 @@ int valorConvertido = 0;  //vou converter o valor analógico para ppm e printar 
 void setup() {
   Serial.begin(9600);   // definição da porta serial para comunicação
   Serial.println("A serial tá funcionando\n");
+  pinMode(pinoSensor, INPUT);   // Adicionei isso aqui por precaução, funcionou sem
 }
 
 void loop() {
