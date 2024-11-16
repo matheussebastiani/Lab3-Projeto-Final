@@ -21,6 +21,6 @@ void loop() {
 
 }
 
-//Valor com luminosidade alta (luz ligada): 700 (com a lanterna do celular incidindo luz sobre ele: 420 a 440)
+//Valor com luminosidade alta (luz ligada): 700 (com a lanterna do celular incidindo luz sobre ele: 420 a 440). Luz do começo da tarde: cerca de 450
 //Valor incidindo a luz solar de fim de tarde: Cerca de 620 a 650. Considerarei essa faixa como luminosidade média
 //Valor com a luz apagada e janela fechada: casa dos 1000
