@@ -2,14 +2,16 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QDebug>
-ArduinoUnoSerial::ArduinoUnoSerial()
-{
+#include <QMessageBox>
+
+ArduinoUnoSerial::ArduinoUnoSerial() : ArduinoIsAvailable{false}, ArduinoUnoSerialPortName{""}{
     ArduinoUno = new(QSerialPort);  // Instanciamos o Objeto
 }
 
 /*
     A Função Membor IsArduinoAvailable verifica as portas seriais conectadas ao computador e verifica se a placa
     do Arduino está conectada ao PC. Caso o Vendor ID e o Product ID sejam compatíveis, a função retornará true.
+    Essa função também aproveita para salvar o "nome" da porta serial em questão para ser utilizada posteriormente.
     Foi possível saber a Vendor ID e a Product ID do Arduino executando o seguinte teste no construtor da
     mainwindow.cpp:
 
@@ -34,8 +36,8 @@ ArduinoUnoSerial::ArduinoUnoSerial()
         }
     }
 
-    // Rodando o construtor, foi possível verificar que a única porta serial que possui vendor ID é o 9025, justamente o do Arduino
-    // O product identifier do Arduino Uno, é 67
+     Rodando o construtor, foi possível verificar que a única porta serial que possui vendor ID é o 9025, justamente o do Arduino
+     O product identifier do Arduino Uno, é 67
 */
 
 
@@ -48,6 +50,7 @@ bool ArduinoUnoSerial::IsArduinoAvailable(){
         if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){ // se tiver um vendor identifier:
 
             if((serialPortInfo.vendorIdentifier() == ArduinoVendorID) && serialPortInfo.productIdentifier() == Arduino_Uno_ProductID){
+                ArduinoUnoSerialPortName = serialPortInfo.portName();     // Salva o "nome" da porta serial em uma variável membro do tipo QString
                 ArduinoIsAvailable = true;
                 return ArduinoIsAvailable;
             }
@@ -56,3 +59,30 @@ bool ArduinoUnoSerial::IsArduinoAvailable(){
     return ArduinoIsAvailable;
 
 }
+
+/*
+    Essa função irá basicamente inicializar a porta serial para realizar a leitura e envio de dados pela serial
+    se o Arduino estiver disponível.
+    Na porta encontrada anteriormente pela função IsArduinoAvailable, com a função de Read e Write,
+    Tendo Baud Rate de 9600 e oito bits de dados, e outras configurações padrão
+*/
+
+bool ArduinoUnoSerial::SetupArduinoSerialPortRW(){
+    if(ArduinoIsAvailable){
+        ArduinoUno->setPortName(ArduinoUnoSerialPortName);
+        ArduinoUno->open(QSerialPort::ReadWrite);
+        ArduinoUno->setBaudRate(QSerialPort::Baud9600);
+        ArduinoUno->setDataBits(QSerialPort::Data8);
+        ArduinoUno->setStopBits(QSerialPort::OneStop);
+        ArduinoUno->setParity(QSerialPort::NoParity);
+        ArduinoUno->setFlowControl(QSerialPort::NoFlowControl);
+
+        return true;
+    }
+
+    else{
+        return false;
+    }
+}
+
+
