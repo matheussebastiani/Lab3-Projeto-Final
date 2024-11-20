@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../Projeto-Final-Lab3 -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+INCPATH       = -I../Projeto-Final-Lab3 -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtSerialPort -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = Projeto-Final-Lab31.0.0
 DISTDIR = /home/matheus/Área\ de\ Trabalho/Engenharia\ de\ Computação/Quarto\ Semestre\ 2024-2/Laboratório\ de\ Programação\ 3/Projeto\ Final/Lab3-Projeto-Final/QT\ Project/build-Projeto-Final-Lab3-Desktop-Debug/.tmp/Projeto-Final-Lab31.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu
-LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
+LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6SerialPort.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Projeto-Final-Lab3/main.cpp \
+SOURCES       = ../Projeto-Final-Lab3/arduinounoserial.cpp \
+		../Projeto-Final-Lab3/main.cpp \
 		../Projeto-Final-Lab3/mainwindow.cpp moc_mainwindow.cpp
-OBJECTS       = main.o \
+OBJECTS       = arduinounoserial.o \
+		main.o \
 		mainwindow.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
@@ -89,6 +91,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_serialport.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri \
@@ -102,6 +105,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf \
+		../Projeto-Final-Lab3/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf \
@@ -122,7 +126,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		../Projeto-Final-Lab3/Projeto-Final-Lab3.pro ../Projeto-Final-Lab3/mainwindow.h ../Projeto-Final-Lab3/main.cpp \
+		../Projeto-Final-Lab3/Projeto-Final-Lab3.pro ../Projeto-Final-Lab3/arduinounoserial.h \
+		../Projeto-Final-Lab3/mainwindow.h ../Projeto-Final-Lab3/arduinounoserial.cpp \
+		../Projeto-Final-Lab3/main.cpp \
 		../Projeto-Final-Lab3/mainwindow.cpp
 QMAKE_TARGET  = Projeto-Final-Lab3
 DESTDIR       = 
@@ -167,6 +173,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_serialport.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri \
@@ -180,6 +187,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf \
@@ -203,6 +211,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 		../Projeto-Final-Lab3/Projeto-Final-Lab3.pro \
 		/usr/lib/x86_64-linux-gnu/libQt6Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt6Gui.prl \
+		/usr/lib/x86_64-linux-gnu/libQt6SerialPort.prl \
 		/usr/lib/x86_64-linux-gnu/libQt6Core.prl
 	$(QMAKE) -o Makefile ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf:
@@ -237,6 +246,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_openglwidgets_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_printsupport_private.pri:
+/usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_serialport.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_sql_private.pri:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/modules/qt_lib_testlib.pri:
@@ -250,6 +260,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf:
@@ -273,6 +284,7 @@ Makefile: ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro /usr/lib/x86_64-linux-gnu
 ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro:
 /usr/lib/x86_64-linux-gnu/libQt6Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt6Gui.prl:
+/usr/lib/x86_64-linux-gnu/libQt6SerialPort.prl:
 /usr/lib/x86_64-linux-gnu/libQt6Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../Projeto-Final-Lab3/Projeto-Final-Lab3.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -289,8 +301,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Projeto-Final-Lab3/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Projeto-Final-Lab3/main.cpp ../Projeto-Final-Lab3/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Projeto-Final-Lab3/arduinounoserial.h ../Projeto-Final-Lab3/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Projeto-Final-Lab3/arduinounoserial.cpp ../Projeto-Final-Lab3/main.cpp ../Projeto-Final-Lab3/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Projeto-Final-Lab3/mainwindow.ui $(DISTDIR)/
 
 
@@ -327,9 +339,10 @@ compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
 moc_mainwindow.cpp: ../Projeto-Final-Lab3/mainwindow.h \
+		../Projeto-Final-Lab3/arduinounoserial.h \
 		moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include '/home/matheus/Área de Trabalho/Engenharia de Computação/Quarto Semestre 2024-2/Laboratório de Programação 3/Projeto Final/Lab3-Projeto-Final/QT Project/build-Projeto-Final-Lab3-Desktop-Debug/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I'/home/matheus/Área de Trabalho/Engenharia de Computação/Quarto Semestre 2024-2/Laboratório de Programação 3/Projeto Final/Lab3-Projeto-Final/QT Project/Projeto-Final-Lab3' -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Projeto-Final-Lab3/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include '/home/matheus/Área de Trabalho/Engenharia de Computação/Quarto Semestre 2024-2/Laboratório de Programação 3/Projeto Final/Lab3-Projeto-Final/QT Project/build-Projeto-Final-Lab3-Desktop-Debug/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I'/home/matheus/Área de Trabalho/Engenharia de Computação/Quarto Semestre 2024-2/Laboratório de Programação 3/Projeto Final/Lab3-Projeto-Final/QT Project/Projeto-Final-Lab3' -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtSerialPort -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Projeto-Final-Lab3/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -352,10 +365,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-main.o: ../Projeto-Final-Lab3/main.cpp ../Projeto-Final-Lab3/mainwindow.h
+arduinounoserial.o: ../Projeto-Final-Lab3/arduinounoserial.cpp ../Projeto-Final-Lab3/arduinounoserial.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arduinounoserial.o ../Projeto-Final-Lab3/arduinounoserial.cpp
+
+main.o: ../Projeto-Final-Lab3/main.cpp ../Projeto-Final-Lab3/mainwindow.h \
+		../Projeto-Final-Lab3/arduinounoserial.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Projeto-Final-Lab3/main.cpp
 
 mainwindow.o: ../Projeto-Final-Lab3/mainwindow.cpp ../Projeto-Final-Lab3/mainwindow.h \
+		../Projeto-Final-Lab3/arduinounoserial.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Projeto-Final-Lab3/mainwindow.cpp
 

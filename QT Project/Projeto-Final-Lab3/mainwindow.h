@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include "arduinounoserial.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +22,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    ArduinoUnoSerial *arduino;
 };
 #endif // MAINWINDOW_H

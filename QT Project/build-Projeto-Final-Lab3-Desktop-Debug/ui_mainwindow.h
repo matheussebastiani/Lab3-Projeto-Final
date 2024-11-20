@@ -137,6 +137,7 @@ public:
 
         imagem_2_label = new QLabel(centralwidget);
         imagem_2_label->setObjectName(QString::fromUtf8("imagem_2_label"));
+        imagem_2_label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         horizontalLayout->addWidget(imagem_2_label);
 
@@ -166,7 +167,7 @@ public:
         valor_gases_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         presenca_chuva_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         chuva_label->setText(QCoreApplication::translate("MainWindow", "Presen\303\247a de Chuva:", nullptr));
-        UV_label->setText(QCoreApplication::translate("MainWindow", "N\303\255vel de Radia\303\247\303\243o UV", nullptr));
+        UV_label->setText(QCoreApplication::translate("MainWindow", "N\303\255vel de Radia\303\247\303\243o UV:", nullptr));
         imagem_1_label->setText(QCoreApplication::translate("MainWindow", "Imagem 1", nullptr));
         titulo_label->setText(QCoreApplication::translate("MainWindow", "ESTA\303\207\303\203O METEOROL\303\223GICA", nullptr));
         imagem_2_label->setText(QCoreApplication::translate("MainWindow", "Imagem_2", nullptr));

@@ -122,7 +122,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="UV_label">
         <property name="text">
-         <string>Nível de Radiação UV</string>
+         <string>Nível de Radiação UV:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -161,6 +161,9 @@
        <widget class="QLabel" name="imagem_2_label">
         <property name="text">
          <string>Imagem_2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
