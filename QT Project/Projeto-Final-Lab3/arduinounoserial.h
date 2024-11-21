@@ -22,8 +22,8 @@ public:
     void closeSerialPort(){
         ArduinoUno->close();
     }
-    void openSerialPort(){
-       ArduinoUno->open(QSerialPort::ReadWrite);
+    bool openSerialPort(){
+        return ArduinoUno->open(QSerialPort::ReadWrite);
     }
 
 

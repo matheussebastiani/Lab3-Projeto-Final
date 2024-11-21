@@ -3,6 +3,7 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 #include <QMessageBox>
+#include <QByteArray>
 
 ArduinoUnoSerial::ArduinoUnoSerial() : ArduinoIsAvailable{false}, ArduinoUnoSerialPortName{""}{
     ArduinoUno = new(QSerialPort);  // Instanciamos o Objeto
@@ -70,19 +71,22 @@ bool ArduinoUnoSerial::IsArduinoAvailable(){
 bool ArduinoUnoSerial::SetupArduinoSerialPortRW(){
     if(ArduinoIsAvailable){
         ArduinoUno->setPortName(ArduinoUnoSerialPortName);
-        ArduinoUno->open(QSerialPort::ReadWrite);
         ArduinoUno->setBaudRate(QSerialPort::Baud9600);
         ArduinoUno->setDataBits(QSerialPort::Data8);
         ArduinoUno->setStopBits(QSerialPort::OneStop);
         ArduinoUno->setParity(QSerialPort::NoParity);
         ArduinoUno->setFlowControl(QSerialPort::NoFlowControl);
 
-        return true;
+        return true; // usado apenas para debug / ver se vou abrir ou não um dialog.
     }
 
     else{
         return false;
     }
 }
+
+
+
+
 
 
