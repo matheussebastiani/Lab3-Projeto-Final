@@ -7,6 +7,18 @@
 
 ArduinoUnoSerial::ArduinoUnoSerial() : ArduinoIsAvailable{false}, ArduinoUnoSerialPortName{""}{
     ArduinoUno = new(QSerialPort);  // Instanciamos o Objeto
+
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){ // Para cada serialPortInfo em QSerialPortInfo::availablePorts()
+                                                                                       // Nesse caso, availablePorts() é uma QList que será iterada
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){ // se tiver um vendor identifier:
+
+            if((serialPortInfo.vendorIdentifier() == ArduinoVendorID) && serialPortInfo.productIdentifier() == Arduino_Uno_ProductID){
+                ArduinoUnoSerialPortName = serialPortInfo.portName();     // Salva o "nome" da porta serial em uma variável membro do tipo QString
+                ArduinoIsAvailable = true;
+            }
+    }
+
+}
 }
 
 /*
@@ -19,7 +31,7 @@ ArduinoUnoSerial::ArduinoUnoSerial() : ArduinoIsAvailable{false}, ArduinoUnoSeri
     arduino = new QSerialPort; //instanciando a porta serial do arduino como um objeto
 
     //Vamos verificar quantas portas seriais temos disponíveis:
-
+valorLuminosidade
     qDebug() << "Quantidade de portas seriais disponíveis: " << QSerialPortInfo::availablePorts().length();
 
     // o foreach é uma palavra reservada do Qt que é semelhante ao for( : ) do C++, porém com alguns poderes a mais,
@@ -44,19 +56,6 @@ ArduinoUnoSerial::ArduinoUnoSerial() : ArduinoIsAvailable{false}, ArduinoUnoSeri
 
 bool ArduinoUnoSerial::IsArduinoAvailable(){
 
-    ArduinoIsAvailable = false;
-
-    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){ // Para cada serialPortInfo em QSerialPortInfo::availablePorts()
-                                                                                       // Nesse caso, availablePorts() é uma QList que será iterada
-        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){ // se tiver um vendor identifier:
-
-            if((serialPortInfo.vendorIdentifier() == ArduinoVendorID) && serialPortInfo.productIdentifier() == Arduino_Uno_ProductID){
-                ArduinoUnoSerialPortName = serialPortInfo.portName();     // Salva o "nome" da porta serial em uma variável membro do tipo QString
-                ArduinoIsAvailable = true;
-                return ArduinoIsAvailable;
-            }
-    }
-}
     return ArduinoIsAvailable;
 
 }

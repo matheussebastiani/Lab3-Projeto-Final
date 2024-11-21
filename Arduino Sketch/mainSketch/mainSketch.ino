@@ -11,7 +11,7 @@ int valorMQ2ppm = 0;
 // Função que lê o pino do sensor de gás MQ2 e retorna o valor convertido para a escala ppm
 
 int getAirQuality(int pino){
-
+  delay(10);
   valorMQ2ppm = analogRead(pino);
   valorMQ2ppm = map(valorMQ2ppm, 0, 1023, 200, 10000); // sei que poderia deixar a função mais enxuta, mas gostaria de deixar ela bem legível
 
@@ -52,7 +52,7 @@ float TemperaturaMedia(int pino){ // Esse sensor é um sensor analógico. como s
   
   while(n--){
 
-    tempreatura += analogRead(pino) * ((5.0/1023.0) * 100.0); // Converte valores de tensão para graus celsius
+    temperatura += analogRead(pino) * ((5.0/1023.0) * 100.0); // Converte valores de tensão para graus celsius
 
     delay(100);
 
@@ -96,8 +96,8 @@ float valorSensorUV;
 float getTensaoUV(int pino){
 
   valorSensorUV = analogRead(pino);
-  TensaoSaida = valorSensorUV / (1024.0*5.0) * 1000;   // Convertendo o valor para mili Volts. A saída do sensor varia entre 0 e 1 V;
-  return TensaoSaida;
+  tensaoSaida = valorSensorUV / (1024.0*5.0) * 1000;   // Convertendo o valor para mili Volts. A saída do sensor varia entre 0 e 1 V;
+  return tensaoSaida;
 
 
 }
@@ -157,12 +157,21 @@ void setup() {
 
 }
 
+char comando;
+
 void loop() {
   
   if(Serial.available() > 0){ // Primeiro, verifica se têm algum dado disponível na Serial
 
-    String comando = Serial.readStringUntil(";");   // Vou finalizar minhas mensagens com ;
+    comando = Serial.read();
 
   }
+
+  if(comando == 'r'){
+
+    Serial.println(getAirQuality(pinoSensorMQ2));
+
+  }
+
 
 }

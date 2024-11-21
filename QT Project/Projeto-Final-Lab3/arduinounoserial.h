@@ -7,6 +7,7 @@ class ArduinoUnoSerial
 {
 public:
     ArduinoUnoSerial();
+    ~ArduinoUnoSerial();
     bool IsArduinoAvailable();
     bool SetupArduinoSerialPortRW();
 
