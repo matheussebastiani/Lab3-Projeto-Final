@@ -115,6 +115,34 @@ float getValorUV(int pino){
 */
 
 
+int pinoSensorPoeira = 8;         // pino digital 8
+unsigned long duracao = 0;        // medições de tempo serão necessárias para esse sensor
+unsigned long tempo_inicio = 0;
+unsigned long tempo_final = 0;
+unsigned long tempo_amostragem_ms = 30000;
+unsigned long duracao_pulso_low = 0;
+float porcentagem = 0;
+float concentracao = 0;
+
+float getConcentracaoPoeira(int pino){
+
+  while((millis() - tempo_inicio) < tempo_amostragem_ms){
+
+    duracao = pulseIn(pino, LOW); //função pulseIn: mede o tempo que um pulso fica em low/high EM MICROSSEGUNDOS
+    duracao_pulso_low += duracao;           //incrementa o acumulador para encontrarmos o tempo total em que o sinal ficou em nivel lógico baixo
+
+  }
+
+  porcentagem = (duracao_pulso_low) / (tempo_amostragem_ms * 10.0); // encontrando quantos % do tempo de amostragem o sinal ficou em low
+  concentracao = 1.1 * pow(porcentagem, 3) - 3.8 * pow(porcentagem, 2) + 520 * porcentagem + 0.62;                     // essa foi a curva característica que eu encontrei para o sensor
+  
+  duracao_pulso_low = 0; // reseta as variáveis para a próxima medição
+  tempo_inicio = millis();
+  
+  return concentracao;
+
+
+}
 
 
 void setup() {
@@ -124,6 +152,8 @@ void setup() {
   pinMode(pinoLM35, INPUT);
   pinMode(pinoLDR, INPUT);
   pinMode(pinoUV, INPUT);
+  pinMode(pinoSensorPoeira, INPUT);
+  tempo_inicio = millis();
 
 }
 
