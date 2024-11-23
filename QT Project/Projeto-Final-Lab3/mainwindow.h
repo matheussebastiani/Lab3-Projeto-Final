@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "arduinounoserial.h"
+#include "arduinoserial.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +22,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    //ArduinoUnoSerial *arduino;
+    ArduinoSerial *arduino;
 };
 #endif // MAINWINDOW_H

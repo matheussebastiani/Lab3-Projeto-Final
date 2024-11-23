@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "arduinounoserial.h"
+#include "arduinoserial.h"
 #include <QWidget>
 #include <QMessageBox>
 

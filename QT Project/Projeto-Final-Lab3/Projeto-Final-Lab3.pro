@@ -10,13 +10,11 @@ CONFIG += c++11
 
 SOURCES += \
     arduinoserial.cpp \
-    arduinounoserial.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     arduinoserial.h \
-    arduinounoserial.h \
     mainwindow.h
 
 FORMS += \
