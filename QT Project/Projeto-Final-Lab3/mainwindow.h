@@ -1,6 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
@@ -23,6 +22,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    ArduinoUnoSerial *arduino;
+    //ArduinoUnoSerial *arduino;
 };
 #endif // MAINWINDOW_H

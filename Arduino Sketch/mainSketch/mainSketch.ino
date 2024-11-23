@@ -158,20 +158,21 @@ void setup() {
 }
 
 char comando;
+String dados;
+
 
 void loop() {
+
+  Serial.print(getAirQuality(pinoSensorMQ2));               // LINHA[0]
+  Serial.print(";");
+  Serial.print(getValorChuva(pinoSensorChuva));             // LINHA[1]
+  Serial.print(";");
+  Serial.print(TemperaturaMedia(pinoLM35));                 // LINHA[2]
+  Serial.print(";");
+  Serial.print(getLuminosidade(pinoLDR));                   // LINHA[3]
+  Serial.print(";");
+  Serial.print(getTensaoUV(pinoUV));                        // LINHA[4]
+  Serial.print(";");
+  Serial.println(getConcentracaoPoeira(pinoSensorPoeira));  // LINHA[5]
   
-  if(Serial.available() > 0){ // Primeiro, verifica se têm algum dado disponível na Serial
-
-    comando = Serial.read();
-
-  }
-
-  if(comando == 'r'){
-
-    Serial.println(getAirQuality(pinoSensorMQ2));
-
-  }
-
-
 }
