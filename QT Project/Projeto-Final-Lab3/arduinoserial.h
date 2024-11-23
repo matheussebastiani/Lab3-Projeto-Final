@@ -1,10 +1,11 @@
+
 #ifndef ARDUINOSERIAL_H
 #define ARDUINOSERIAL_H
 
 #include <QObject>
 #include <QSerialPort>
 #include <QSerialPortInfo>
-
+#include "mainwindow.h"
 class ArduinoSerial : public QObject
 {
     Q_OBJECT
@@ -14,7 +15,7 @@ private:
     const quint16 Arduino_Uno_ProductID = 67;           // Product ID do Arduino Uno
     bool ArduinoIsAvailable;                        // Caso o programa conseguir achar o Arduino, essa variável membro será true
     QString ArduinoUnoSerialPortName;
-
+    MainWindow *caller;
     void closeSerialPort(){
         ArduinoUno->close();
     }
@@ -39,9 +40,6 @@ public:
     bool IsArduinoAvailable();
 
 //     Funções setter
-
-
-
 
 public slots:
     void talkToArduino();

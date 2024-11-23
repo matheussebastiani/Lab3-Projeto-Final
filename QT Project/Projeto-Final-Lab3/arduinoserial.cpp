@@ -5,7 +5,6 @@
 #include <QByteArray>
 #include <QDebug>
 
-
 ArduinoSerial::ArduinoSerial(){
 
  ArduinoUno = new(QSerialPort);
@@ -18,6 +17,7 @@ ArduinoSerial::ArduinoSerial(){
          ArduinoIsAvailable = true;
          if(SetupArduinoSerialPortRW()){
             QObject::connect(ArduinoUno, &QSerialPort::readyRead, this, &ArduinoSerial::talkToArduino); // signal, objeto, slot
+            qDebug() << "Cheguei até aqui!";
          }
       }
     }
@@ -59,10 +59,9 @@ bool ArduinoSerial::SetupArduinoSerialPortRW(){
 }
 
 void ArduinoSerial::talkToArduino(){
-
     if(ArduinoIsAvailable && ArduinoUno->canReadLine()){
 
-           qDebug() << ArduinoUno->readLine();
+           //caller->updateMainWindow(ArduinoUno->readLine()); // chama a função que vai atualizar a UI
 
     }
 

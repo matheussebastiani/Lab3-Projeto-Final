@@ -11,7 +11,7 @@ int valorMQ2ppm = 0;
 // Função que lê o pino do sensor de gás MQ2 e retorna o valor convertido para a escala ppm
 
 int getAirQuality(int pino){
-  delay(10);
+  delay(100);
   valorMQ2ppm = analogRead(pino);
   valorMQ2ppm = map(valorMQ2ppm, 0, 1023, 200, 10000); // sei que poderia deixar a função mais enxuta, mas gostaria de deixar ela bem legível
 
@@ -29,7 +29,7 @@ int pinoSensorChuva = A1;
 int valorChuva = 0;
 
 int getValorChuva(int pino){ // Sei que essa função é desnecessária, mas acho interessante deixar o loop principal mais limpo, deixando o código mais modularizado e setorizado
-
+  delay(100);
   valorChuva = analogRead(pino);
   return valorChuva;
 
@@ -45,7 +45,7 @@ int pinoLM35 = A2;
 float temperatura = 0;
 
 float TemperaturaMedia(int pino){ // Esse sensor é um sensor analógico. como suas medições variam bastante, vou fazer uma média de vários valores lidos, para a temperatura não ficar variando tanto
-
+  delay(100);
   float temperatura = 0;
 
   int n = 10;
@@ -73,7 +73,7 @@ int pinoLDR = A3;
 int valorLuminosidade = 0;
 
 int getLuminosidade(int pino){ // também analógico (na verdade um resistor) mas mais facilmente filtrável
-  
+  delay(100);
   valorLuminosidade = analogRead(pino);
 
   return valorLuminosidade;
@@ -94,7 +94,7 @@ float tensaoSaida;
 float valorSensorUV;
 
 float getTensaoUV(int pino){
-
+  delay(100);
   valorSensorUV = analogRead(pino);
   tensaoSaida = valorSensorUV / (1024.0*5.0) * 1000;   // Convertendo o valor para mili Volts. A saída do sensor varia entre 0 e 1 V;
   return tensaoSaida;
@@ -162,17 +162,22 @@ String dados;
 
 
 void loop() {
-
+  delay(100);
   Serial.print(getAirQuality(pinoSensorMQ2));               // LINHA[0]
+  
   Serial.print(";");
+  delay(100);
   Serial.print(getValorChuva(pinoSensorChuva));             // LINHA[1]
   Serial.print(";");
+  delay(100);
   Serial.print(TemperaturaMedia(pinoLM35));                 // LINHA[2]
   Serial.print(";");
+  delay(100);
   Serial.print(getLuminosidade(pinoLDR));                   // LINHA[3]
   Serial.print(";");
-  Serial.print(getTensaoUV(pinoUV));                        // LINHA[4]
-  Serial.print(";");
-  Serial.println(getConcentracaoPoeira(pinoSensorPoeira));  // LINHA[5]
+  delay(100);
+  Serial.println(getTensaoUV(pinoUV));                        // LINHA[4]
+  //Serial.print(";");
+  //Serial.println(getConcentracaoPoeira(pinoSensorPoeira));  // LINHA[5]
   
 }

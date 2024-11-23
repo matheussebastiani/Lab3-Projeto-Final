@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     arduinoserial.cpp \
+    dealwithdata.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     arduinoserial.h \
+    dealwithdata.h \
     mainwindow.h
 
 FORMS += \

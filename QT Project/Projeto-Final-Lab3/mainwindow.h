@@ -4,12 +4,13 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "arduinoserial.h"
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -18,10 +19,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void updateMainWindow(QString dados);
 
 
 private:
     Ui::MainWindow *ui;
-    ArduinoSerial *arduino;
+    //ArduinoSerial *arduino;
+    //DealWithData *dados;
 };
 #endif // MAINWINDOW_H
