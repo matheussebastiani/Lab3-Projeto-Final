@@ -1,33 +1,31 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
 #include <QWidget>
 #include <QMessageBox>
 #include "dealwithdata.h"
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-   // arduino = new(ArduinoSerial);
-  //  qDebug() << "A porta do arduino está disponível? " << arduino->IsArduinoAvailable();
-  //  qDebug() << "A porta serial do Arduino é a " << arduino->getArduinoUnoSerialPortName();
-    DealWithData *dados = new(DealWithData);
-   //    arduino->SetupArduinoSerialPortRW();
+#include "arduinoserial.h"
 
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow), Arduino(nullptr), data(nullptr){
+
+    ui->setupUi(this);
+    Arduino = new ArduinoSerial(this);
+    data = new DealWithData;
     }
+
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
-  //  delete arduino;
+    delete Arduino;
+    delete data;
 }
 
-void updateMainWindow(QString dados){
+void MainWindow::updateMainWindow(const QString& dados){
 
-
+    qDebug() << dados;
 
 }

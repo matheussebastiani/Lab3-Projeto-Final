@@ -5,17 +5,21 @@
 #include <QObject>
 #include <QSerialPort>
 #include <QSerialPortInfo>
-#include "mainwindow.h"
+
+
+class MainWindow;
+
 class ArduinoSerial : public QObject
 {
     Q_OBJECT
+
 private:
     QSerialPort *ArduinoUno;                        // Iniciamos um objeto da classe QSerialPort
+    MainWindow *mainWindow;
     const quint16 ArduinoVendorID = 9025;               // Vendor ID do Arduino, vamos utilizar para identificar que tem um Arduino Conectado
     const quint16 Arduino_Uno_ProductID = 67;           // Product ID do Arduino Uno
     bool ArduinoIsAvailable;                        // Caso o programa conseguir achar o Arduino, essa variável membro será true
     QString ArduinoUnoSerialPortName;
-    MainWindow *caller;
     void closeSerialPort(){
         ArduinoUno->close();
     }
@@ -25,7 +29,7 @@ private:
 
 
 public:
-    ArduinoSerial();
+    ArduinoSerial(MainWindow *mainWindow);
     ArduinoSerial(const ArduinoSerial&) = delete; //sem construtor de cópia
     ArduinoSerial operator=(const ArduinoSerial&) = delete; // sem operador de atribuição aqui eles não são necessários
     virtual ~ArduinoSerial();

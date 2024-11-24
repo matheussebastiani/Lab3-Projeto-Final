@@ -7,7 +7,8 @@ class DealWithData
 {
 
 private:
-    //ArduinoSeral
+
+
 
 public:
     DealWithData();

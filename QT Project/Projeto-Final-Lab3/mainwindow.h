@@ -5,6 +5,8 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
+class ArduinoSerial;
+class DealWithData;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,12 +21,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void updateMainWindow(QString dados);
+    void updateMainWindow(const QString& dados);
 
 
 private:
     Ui::MainWindow *ui;
-    //ArduinoSerial *arduino;
-    //DealWithData *dados;
+    ArduinoSerial *Arduino;
+    DealWithData *data;
+
 };
 #endif // MAINWINDOW_H

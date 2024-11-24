@@ -4,8 +4,8 @@
 #include <QIODevice>
 #include <QByteArray>
 #include <QDebug>
-
-ArduinoSerial::ArduinoSerial(){
+#include "mainwindow.h"
+ArduinoSerial::ArduinoSerial(MainWindow *mainWindow) : mainWindow(mainWindow){
 
  ArduinoUno = new(QSerialPort);
  foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){ // Para cada serialPortInfo em QSerialPortInfo::availablePorts()
@@ -61,7 +61,7 @@ bool ArduinoSerial::SetupArduinoSerialPortRW(){
 void ArduinoSerial::talkToArduino(){
     if(ArduinoIsAvailable && ArduinoUno->canReadLine()){
 
-           //caller->updateMainWindow(ArduinoUno->readLine()); // chama a função que vai atualizar a UI
+    mainWindow->updateMainWindow(ArduinoUno->readLine());
 
     }
 
