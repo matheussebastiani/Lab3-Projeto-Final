@@ -62,6 +62,7 @@ void ArduinoSerial::talkToArduino(){
     if(ArduinoIsAvailable && ArduinoUno->canReadLine()){
 
     mainWindow->updateMainWindow(ArduinoUno->readLine());
+    //qDebug() << "Chamei a updatemainwindow";
 
     }
 

@@ -1,6 +1,9 @@
+#include <QString>
+#include <QStringList>
+
 #ifndef DEALWITHDATA_H
 #define DEALWITHDATA_H
-#include "arduinoserial.h"
+
 
 
 class DealWithData
@@ -8,10 +11,40 @@ class DealWithData
 
 private:
 
+    QStringList Valores;
 
+    int MQ2_read;
+    int FC37_read;
+    float temperature;
+    int luminosidade;
+    double tensaoUV;
+    long long DSM501_read;
 
 public:
     DealWithData();
+    void setupSubStrings(const QString& string);
+
+    // Funções getter
+
+    int getMQ2_read(){
+        return MQ2_read;
+    }
+
+    int getFC37_read(){
+        return FC37_read;
+    }
+
+    float getTemperature(){
+        return temperature;
+    }
+
+    int getLuminosidade(){
+        return luminosidade;
+    }
+
+    double getTensaoUV(){
+        return tensaoUV;
+    }
 };
 
 #endif // DEALWITHDATA_H
