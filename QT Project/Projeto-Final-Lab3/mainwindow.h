@@ -24,7 +24,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateMainWindow(const QString& dados);
-    void updateDateAndTime();
+
 
 
 private:
@@ -37,7 +37,13 @@ private:
     float temp_min;
     QTime inicio_noite;
     QTime inicio_dia;
+    int contador;
 
+    // Funções internas para atualizar a UI
+
+    void updateDateAndTime();
+
+    void setupTemp(float temp);
 
 
 };

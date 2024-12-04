@@ -20,6 +20,7 @@ private:
     double tensaoUV;
     long long DSM501_read;
 
+
     int valorUV;
 
     int setupUVRate(double uvVoltage);
