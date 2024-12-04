@@ -9,9 +9,10 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow), Arduino(nullptr), data(nullptr), temp_max{0}, temp_min{0}, contador{0}{
+    ui(new Ui::MainWindow), Arduino(nullptr), data(nullptr), temp_max{0}, temp_min{0}, contador{0}, temperatura{0}{
 
     ui->setupUi(this);
+
     Arduino = new ArduinoSerial(this);
     data = new DealWithData;
     inicio_noite.setHMS(19,0,0);

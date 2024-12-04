@@ -34,8 +34,18 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="1">
        <widget class="QLabel" name="valor_UV_label">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;</string>
+        </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string>Nível dentro da tabela de tensão -&gt; valor UV</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -44,8 +54,18 @@
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="valor_gases_label">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;</string>
+        </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string>Valor Gases (ppm - parte por milhão)</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -54,6 +74,16 @@
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="gases_label">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;</string>
+        </property>
         <property name="text">
          <string>Concentração de Gases liquefeitos de petróleo:</string>
         </property>
@@ -64,6 +94,16 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="UV_label">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;</string>
+        </property>
         <property name="text">
          <string>Nível de Radiação UV:</string>
         </property>
@@ -98,6 +138,16 @@
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QLabel" name="temp_max_label">
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: white;</string>
+            </property>
             <property name="text">
              <string>TempMax</string>
             </property>
@@ -127,6 +177,16 @@
           </item>
           <item>
            <widget class="QLabel" name="temp_min_label">
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: white;</string>
+            </property>
             <property name="text">
              <string>TempMin</string>
             </property>
@@ -149,7 +209,8 @@
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">color: white;</string>
+           <string notr="true">color: white;
+border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
           </property>
           <property name="text">
            <string>Hora</string>
@@ -185,8 +246,18 @@
         </item>
         <item>
          <widget class="QLabel" name="valor_temperatura_label">
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: white;</string>
+          </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>Temperatura</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
