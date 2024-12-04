@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QDateTime>
 
 class ArduinoSerial;
 class DealWithData;
@@ -22,12 +23,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateMainWindow(const QString& dados);
+    void updateDateAndTime();
 
 
 private:
     Ui::MainWindow *ui;
     ArduinoSerial *Arduino;
     DealWithData *data;
+    QDate dia;
+    QTime hora;
+    float temp_max;
+    float temp_min;
 
 };
 #endif // MAINWINDOW_H

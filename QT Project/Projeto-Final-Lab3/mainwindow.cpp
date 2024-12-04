@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "dealwithdata.h"
 #include "arduinoserial.h"
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -24,16 +25,25 @@ MainWindow::~MainWindow()
     delete data;
 }
 
+void MainWindow::updateDateAndTime(){
+
+    dia = QDate::currentDate();
+    hora = QTime::currentTime();
+
+    ui->hora_label->setText(hora.toString("HH:mm"));
+    ui->dia_label->setText(dia.toString("dd/MM/yyyy"));
+
+}
+
 void MainWindow::updateMainWindow(const QString& dados){
 
    // qDebug() << dados;
     qDebug() << "Oi, eu sou a updateMainWindow!";
-    ui->imagem_1_label->setText(dados);
+
 
     qDebug() << dados;
 
-    data->setupSubStrings(dados);
-
+    updateDateAndTime();
 
 
     ui->valor_gases_label->setText(QString::number(data->getMQ2_read())); // Só vai QString KKKKKKKKKKKKKK
