@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include <QCoreApplication>
 #include <QMainWindow>
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
@@ -34,6 +35,10 @@ private:
     QTime hora;
     float temp_max;
     float temp_min;
+    QTime inicio_noite;
+    QTime inicio_dia;
+
+
 
 };
 #endif // MAINWINDOW_H

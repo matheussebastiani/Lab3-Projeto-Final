@@ -20,6 +20,10 @@ private:
     double tensaoUV;
     long long DSM501_read;
 
+    int valorUV;
+
+    int setupUVRate(double uvVoltage);
+
 public:
     DealWithData();
     void setupSubStrings(const QString& string);
@@ -44,6 +48,10 @@ public:
 
     double getTensaoUV(){
         return tensaoUV;
+    }
+
+    int getUVRate(){
+        return valorUV;
     }
 };
 

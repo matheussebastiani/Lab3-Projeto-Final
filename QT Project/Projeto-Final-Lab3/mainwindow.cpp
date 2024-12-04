@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     Arduino = new ArduinoSerial(this);
     data = new DealWithData;
+    inicio_noite.setHMS(19,0,0);
+    inicio_dia.setHMS(5,30,0);
     }
 
 
@@ -45,7 +47,9 @@ void MainWindow::updateMainWindow(const QString& dados){
 
     updateDateAndTime();
 
+    data->setupSubStrings(dados);
 
+    ui->temp_max_label->setText(QString::number(data->getTemperature()) + " ºC");
     ui->valor_gases_label->setText(QString::number(data->getMQ2_read())); // Só vai QString KKKKKKKKKKKKKK
     ui->presenca_chuva_label->setText(QString::number(data->getFC37_read()));
     ui->valor_temperatura_label->setText(QString::number(data->getTemperature()));
