@@ -7,5 +7,8 @@
         <file>img/lua_chuva.png</file>
         <file>img/sol_chuva.png</file>
         <file>img/loading.png</file>
+        <file>img/sol_poluicao.png</file>
+        <file>img/lua_poluicao.png</file>
+        <file>img/chuva_poluicao.png</file>
     </qresource>
 </RCC>

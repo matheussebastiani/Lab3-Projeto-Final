@@ -38,6 +38,7 @@ private:
     QTime inicio_noite;
     QTime inicio_dia;
     int contador;
+    float temperatura;
 
 
 
@@ -60,6 +61,9 @@ private:
     QString sol_chuva = ":img/sol_chuva.png";
     QString sol_sem_nuvens = ":img/sun.png";
     QString loading = ":img/loading.png";
+    QString lua_poluida = ":img/lua_poluicao.png";
+    QString sol_poluicao = ":img/sol_poluicao.png";
+    QString chuva_poluicao = ":img/chuva_poluicao.png";
 
 };
 #endif // MAINWINDOW_H

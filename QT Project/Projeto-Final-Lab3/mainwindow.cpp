@@ -18,8 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
     inicio_dia.setHMS(5,30,0);
 
     ui->imagem_label->setPixmap(loading);
-
-
 }
 
 
@@ -44,9 +42,10 @@ void MainWindow::updateDateAndTime(){
 void MainWindow::setupTemp(float temp){
 
     if(!contador && temp > 0){ // necessário por conta de algumas interações ruidosas no começo
+
         temp_min = temp;
         temp_max = temp;
-
+        temperatura = temp;
 
 
         contador = 1;
@@ -54,14 +53,19 @@ void MainWindow::setupTemp(float temp){
     }
 
     else if(contador){
-        if((temp - temp_max) > 3){
+        if((temp - temp_max) > 2.5){
             temp_max = temp;
         }
 
-        else if((temp_min - temp) > 3){
+        else if((temp_min - temp) > 2.5){
             temp_min = temp;
         }
+
+       else if(temp > temp_min && temp < temp_max){
+            temperatura = temp;
+        }
     }
+
 
 
 }
@@ -71,24 +75,46 @@ void MainWindow::showImage(){
 
     if((hora < inicio_noite) && (hora > inicio_dia)){ // checa se é dia. antes das 19:30 e dps das 5:30
 
-        if(data->getFC37_read() < 1000){
-            ui->imagem_label->setPixmap(sol_chuva);
+        if(data->getFC37_read() < 1000){ // se for de dia e estiver chovendo
+
+            if(data->getMQ2_read() > 5000){
+                ui->imagem_label->setPixmap(chuva_poluicao); // se for dia, estiver chovendo e o sensor de gases detectar alta concentracao de gases
+            }
+
+            else
+                ui->imagem_label->setPixmap(sol_chuva);
         }
-        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 650)){
-            ui->imagem_label->setPixmap(nublado);
+        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 650)){ // se estiver "escuro" e de dia
+
+            if(data->getMQ2_read() > 5000){ // se o sensor de gás estiver detectando algo acima da média
+                ui->imagem_label->setPixmap(sol_poluicao);
+            }
+
+            else
+                ui->imagem_label->setPixmap(nublado);
         }
-        else{
+
             ui->imagem_label->setPixmap(sol_sem_nuvens);
         }
 
-    }
+
     else{
 
-        if(data->getFC37_read() < 1000){
-            ui->imagem_label->setPixmap(lua_chuva);
+        if(data->getFC37_read() < 1000){ // se for de noite e estiver chovendo
+
+            if(data->getMQ2_read() > 5000){
+                ui->imagem_label->setPixmap(chuva_poluicao);    // se estiver chovendo e com alta concentração de gases
+            }
+            else
+                ui->imagem_label->setPixmap(lua_chuva);
         }
-        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 900)){
-            ui->imagem_label->setPixmap(lua_nublada);
+        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 900)){ // se estiver de noite e muito escuro
+
+            if(data->getMQ2_read() > 5000){ // se estiver escuro e poluido
+                ui->imagem_label->setPixmap(lua_poluida);
+            }
+            else
+                ui->imagem_label->setPixmap(lua_nublada);
 
     }
         else{
@@ -119,9 +145,10 @@ void MainWindow::updateMainWindow(const QString& dados){
     ui->temp_max_label->setText(QString::number(temp_max) + " ºC");
     ui->temp_min_label->setText(QString::number(temp_min) + " ºC");
 
+    ui->valor_temperatura_label->setText(QString::number(temperatura) + "ºC");
 
     ui->valor_gases_label->setText(QString::number(data->getMQ2_read()) + " ppm"); // Só vai QString KKKKKKKKKKKKKK
-    ui->presenca_chuva_label->setText(QString::number(data->getFC37_read()));
+
 
     //ui->valor_temperatura_label->setText(QString::number(data->getTemperature()));
 
