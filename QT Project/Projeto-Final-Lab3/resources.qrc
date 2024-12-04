@@ -1,2 +1,16 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>img/sol_poucas_nuvens.png</file>
+        <file>img/sol_nublado.png</file>
+        <file>img/sol_limpo.png</file>
+        <file>img/sol_fumaca.png</file>
+        <file>img/sol_e_chuva.png</file>
+        <file>img/sol_com_nuvens_finas.png</file>
+        <file>img/sol_com_nuvens.png</file>
+        <file>img/nublado_chovendo.png</file>
+        <file>img/nublado.png</file>
+        <file>img/lua_chovendo.png</file>
+        <file>img/lua_cheia_poluicao.png</file>
+        <file>img/lua_cheia_limpa.png</file>
+    </qresource>
+</RCC>
