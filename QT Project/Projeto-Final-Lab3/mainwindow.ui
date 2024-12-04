@@ -85,7 +85,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="gases_label">
         <property name="text">
-         <string>Concentração de Gases liquefeitos de petróleo (ppm):</string>
+         <string>Concentração de Gases liquefeitos de petróleo:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

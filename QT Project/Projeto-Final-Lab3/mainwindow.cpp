@@ -16,7 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
     data = new DealWithData;
     inicio_noite.setHMS(19,0,0);
     inicio_dia.setHMS(5,30,0);
-    }
+
+    ui->imagem_label->setPixmap(loading);
+
+
+}
 
 
 
@@ -62,6 +66,40 @@ void MainWindow::setupTemp(float temp){
 
 }
 
+
+void MainWindow::showImage(){
+
+    if((hora < inicio_noite) && (hora > inicio_dia)){ // checa se é dia. antes das 19:30 e dps das 5:30
+
+        if(data->getFC37_read() < 1000){
+            ui->imagem_label->setPixmap(sol_chuva);
+        }
+        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 650)){
+            ui->imagem_label->setPixmap(nublado);
+        }
+        else{
+            ui->imagem_label->setPixmap(sol_sem_nuvens);
+        }
+
+    }
+    else{
+
+        if(data->getFC37_read() < 1000){
+            ui->imagem_label->setPixmap(lua_chuva);
+        }
+        else if((data->getFC37_read() >= 1000) && (data->getLuminosidade() > 900)){
+            ui->imagem_label->setPixmap(lua_nublada);
+
+    }
+        else{
+            ui->imagem_label->setPixmap(lua_cheia);
+        }
+
+
+}
+}
+
+
 void MainWindow::updateMainWindow(const QString& dados){
 
    // qDebug() << dados;
@@ -76,13 +114,17 @@ void MainWindow::updateMainWindow(const QString& dados){
 
     setupTemp(data->getTemperature());
 
+    showImage();
+
     ui->temp_max_label->setText(QString::number(temp_max) + " ºC");
     ui->temp_min_label->setText(QString::number(temp_min) + " ºC");
 
 
-    ui->valor_gases_label->setText(QString::number(data->getMQ2_read())); // Só vai QString KKKKKKKKKKKKKK
+    ui->valor_gases_label->setText(QString::number(data->getMQ2_read()) + " ppm"); // Só vai QString KKKKKKKKKKKKKK
     ui->presenca_chuva_label->setText(QString::number(data->getFC37_read()));
+
     //ui->valor_temperatura_label->setText(QString::number(data->getTemperature()));
+
     ui->valor_UV_label->setText(QString::number(data->getTensaoUV()));
 
 }
