@@ -6,7 +6,6 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
-
 class MainWindow;
 
 class ArduinoSerial : public QObject

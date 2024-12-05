@@ -33,20 +33,14 @@ private:
     DealWithData *data;
     QDate dia;
     QTime hora;
-    float temp_max;
-    float temp_min;
     QTime inicio_noite;
     QTime inicio_dia;
-    int contador;
-    float temperatura;
-
-
 
     // Funções internas para atualizar a UI
 
     void updateDateAndTime();
 
-    void setupTemp(float temp);
+
 
     // Variáveis membro para as imagens
 
@@ -61,7 +55,7 @@ private:
     QString sol_chuva = ":img/sol_chuva.png";
     QString sol_sem_nuvens = ":img/sun.png";
     QString loading = ":img/loading.png";
-    QString lua_poluida = ":img/lua_poluicao.png";
+    QString lua_poluida = ":img/lua_poluicao.png";  // Mas por que essa imagem como se a visão da lua estivesse turva por conta da poluição? verifique o fenômeno da lua de sangue/lua vermelha
     QString sol_poluicao = ":img/sol_poluicao.png";
     QString chuva_poluicao = ":img/chuva_poluicao.png";
 

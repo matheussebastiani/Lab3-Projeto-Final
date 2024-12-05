@@ -19,11 +19,14 @@ private:
     int luminosidade;
     double tensaoUV;
     long long DSM501_read;
-
+    float temp_max;
+    float temp_min;
+    int contador;
 
     int valorUV;
 
     int setupUVRate(double uvVoltage);
+    void setupTemp(float temp);
 
 public:
     DealWithData();
@@ -41,6 +44,14 @@ public:
 
     float getTemperature(){
         return temperature;
+    }
+
+    float getTempMin(){
+        return temp_min;
+    }
+
+    float getTempMax(){
+        return temp_max;
     }
 
     int getLuminosidade(){

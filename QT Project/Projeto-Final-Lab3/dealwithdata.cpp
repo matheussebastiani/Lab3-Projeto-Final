@@ -6,11 +6,39 @@
 #define QTD_SENSORES 5
 
 
-DealWithData::DealWithData() : MQ2_read{0}, FC37_read{0}, temperature{0}, luminosidade{0}, tensaoUV{0}
+DealWithData::DealWithData() : MQ2_read{0}, FC37_read{0}, temperature{0}, luminosidade{0}, tensaoUV{0}, contador{0}
     {
 
     qDebug() << "DealWithData criado!";
     // Aqui você pode usar a instância de mainWindow como necessário
+}
+
+void DealWithData::setupTemp(float temp){
+
+    if(!contador && temp > 0){ // necessário por conta de algumas interações ruidosas no começo
+
+        temp_min = temp;
+        temp_max = temp;
+        temperature = temp;
+
+
+        contador = 1;
+
+    }
+
+    else if(contador){
+        if((temp - temp_max) > 2.5){
+            temp_max = temp;
+        }
+
+        else if((temp_min - temp) > 2.5){
+            temp_min = temp;
+        }
+
+       else if(temp > temp_min && temp < temp_max){
+            temperature = temp;
+        }
+    }
 }
 
 
@@ -78,7 +106,7 @@ void DealWithData::setupSubStrings(const QString &string){
 
     MQ2_read = Valores[0].toInt();
     FC37_read = Valores[1].toInt();
-    temperature = Valores[2].toFloat();
+    setupTemp(Valores[2].toFloat());
     luminosidade = Valores[3].toInt();
     valorUV = setupUVRate(Valores[4].toDouble());
 

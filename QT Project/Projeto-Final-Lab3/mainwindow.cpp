@@ -9,7 +9,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow), Arduino(nullptr), data(nullptr), temp_max{0}, temp_min{0}, contador{0}, temperatura{0}{
+    ui(new Ui::MainWindow), Arduino(nullptr), data(nullptr){
 
     ui->setupUi(this);
 
@@ -37,37 +37,6 @@ void MainWindow::updateDateAndTime(){
 
     ui->hora_label->setText(hora.toString("HH:mm"));
     ui->dia_label->setText(dia.toString("dd/MM/yyyy"));
-
-}
-
-void MainWindow::setupTemp(float temp){
-
-    if(!contador && temp > 0){ // necessário por conta de algumas interações ruidosas no começo
-
-        temp_min = temp;
-        temp_max = temp;
-        temperatura = temp;
-
-
-        contador = 1;
-
-    }
-
-    else if(contador){
-        if((temp - temp_max) > 2.5){
-            temp_max = temp;
-        }
-
-        else if((temp_min - temp) > 2.5){
-            temp_min = temp;
-        }
-
-       else if(temp > temp_min && temp < temp_max){
-            temperatura = temp;
-        }
-    }
-
-
 
 }
 
@@ -119,6 +88,11 @@ void MainWindow::showImage(){
 
     }
         else{
+
+            if(data->getMQ2_read() > 5000){ // se estiver escuro e poluido
+                ui->imagem_label->setPixmap(lua_poluida);
+            }
+            else
             ui->imagem_label->setPixmap(lua_cheia);
         }
 
@@ -139,14 +113,11 @@ void MainWindow::updateMainWindow(const QString& dados){
 
     data->setupSubStrings(dados);
 
-    setupTemp(data->getTemperature());
-
     showImage();
 
-    ui->temp_max_label->setText(QString::number(temp_max) + " ºC");
-    ui->temp_min_label->setText(QString::number(temp_min) + " ºC");
-
-    ui->valor_temperatura_label->setText(QString::number(temperatura) + "ºC");
+    ui->valor_temperatura_label->setText(QString::number(data->getTemperature()) + "ºC");
+    ui->temp_max_label->setText(QString::number(data->getTempMax()) + " ºC");
+    ui->temp_min_label->setText(QString::number(data->getTempMin()) + " ºC");
 
     ui->valor_gases_label->setText(QString::number(data->getMQ2_read()) + " ppm"); // Só vai QString KKKKKKKKKKKKKK
 
